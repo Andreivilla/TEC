@@ -91,7 +91,7 @@ def formataEntrada(nomeArquivo):
         for linhaA in arquivo:
             linha = leitorlinha(linhaA)
             if n == int(linha[0]):
-                entrada.write(linha[0] + " " + linha[1] + " " + linha[2] + " " + linha[3] + " " + linha[4]+ "\n")#ver se apagar "" fode td dps
+                entrada.write(linha[0] + " " + linha[1] + " " + linha[2] + " " + linha[3] + " " + linha[4]+ "\n")
         arquivo.close()
         n += 1
         if not existeEstado(n, nomeArquivo):
@@ -109,7 +109,7 @@ def listaSimbolos():
             vet.append(linha[2])
     #vet.remove('_')
     return vet
-# cria uma cabeça q simula uma maquina semi ifinita para a direita
+# cria uma cabeça q simula uma maquina semi ifinita para a esquerda
 def criaCabeca():
     saida = open("arquivos/saida.out", "w")
     entrada = open("arquivos/entrada.in", "r")
@@ -121,7 +121,7 @@ def criaCabeca():
     saida.write("0 _ # r 1\n")
     for linhaA in entrada:
         linha = leitorlinha(linhaA)
-        try:#tenta converter em int se não for convertido significa que é um estado não numerico ()
+        try:#tenta converter em int se não for convertido significa que é um estado não numerico
             saida.write(str(int(linha[0])+1))
         except:
             saida.write(linha[0])
@@ -158,8 +158,8 @@ def copiaTempSaida():
         saida.write(linha)
 
 def traduz():
+    criaCabeca()
     nEstados = contaEstados("arquivos/temp.out")
-    print(nEstados)
     listaS = listaSimbolos()
     nsimbolos = len(listaS)
 
@@ -191,35 +191,14 @@ def traduz():
     
     saida.close()
     temp.close()
-                
 
-
-
-            
-
-
-           
-
-
-
-
-
-
-
-
+def ClearTemp():
+    temp = open("arquivos/temp.out", "w")
+    temp.close()
         
 
-        
 
-#f = open("arquivos/sameamount10.in", "r")
-#nomemaquina = "arquivos/sameamount10.in"
-#formataEntrada(nomemaquina)
-def refresh():
-    criaCabeca()
-    copiaSaidaTemp()
-#regracabeca()
-#
-#criaMovendoADireita()
-refresh()
-#sleep(1)
+nomemaquina = "arquivos/sameamount10.in"
+formataEntrada(nomemaquina)
 traduz()
+ClearTemp()
